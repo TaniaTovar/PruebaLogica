@@ -1,0 +1,118 @@
+package prueba2;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class prueba2 {
+	 public static void main(String[] args) {
+		
+		 
+	System.out.print("Insert the descriptions of the years A and B\nseparated by the - sign. Years between 753BC & 2012AD\n");
+	Scanner sc = new Scanner(System.in);
+	String rango = sc.next();
+//	String rango = "753BC-747BC";
+	
+	String[] parts = rango.split("-");
+	String part1 = parts[0];
+	String part2 = parts[1]; 
+	
+	int num1 =0;
+	int num2 =0;
+	int max =1;
+	
+	int A = Integer.parseInt(getnum(part1));
+    int B = Integer.parseInt(getnum(part2));
+ 
+    if (part1.contains("BC")) {
+		num1= (A-754)*-1;
+	} else {
+		num1 = A+753;
+	}
+    
+    if (part2.contains("BC")) {
+ 		num2= (B-754)*-1;
+ 	} else {
+ 		num2 = B+753;
+ 	}
+	
+	 for(int j=num1; j<=num2;j++) {
+		 if (convertirRomano(j).length() > max) {
+			 max=convertirRomano(j).length();
+		 }
+	 }
+	 
+	 System.out.println(max); 
+	 
+	 
+	 	}
+	 
+     public static String getnum(String part){
+		   char[] cadena_div = part.toCharArray();
+			String n = "";
+			for (int i =0; i<cadena_div.length-2;i++) {
+				n+=cadena_div[i]; 	
+			}
+			return n;
+     	}
+     
+     public static String convertirRomano(int numero) {
+	      int i;
+	      String romano = "";
+	      
+	     int miles = numero / 1000;
+	     int centenas = numero / 100 % 10;
+	     int decenas = numero / 10 % 10;
+	     int unidades = numero % 10;
+	      
+	      for (i = 1; i <= miles; i++) {
+	             romano = romano + "M";
+	      }
+
+	      if (centenas == 9) {
+	          romano = romano + "CM";
+	      } else if (centenas >= 5) {
+	                 romano = romano + "D";
+	                 for (i = 6; i <= centenas; i++) {
+	                      romano = romano + "C";
+	                 }
+	      } else if (centenas == 4) {
+	                 romano = romano + "CD";
+	      } else {
+	                 for (i = 1; i <= centenas; i++) {
+	                      romano = romano + "C";
+	             }
+	      }
+
+	      if (decenas == 9) {
+	          romano = romano + "XC";
+	      } else if (decenas >= 5) {
+	                 romano = romano + "L";
+	                 for (i = 6; i <= decenas; i++) {
+	                      romano = romano + "X";
+	                 }
+	      } else if (decenas == 4) {
+	                 romano = romano + "XL";
+	      } else {
+	                 for (i = 1; i <= decenas; i++) {
+	                      romano = romano + "X";
+	                 }
+	      }
+
+	      if (unidades == 9) {
+	          romano = romano + "IX";
+	      } else if (unidades >= 5) {
+	                 romano = romano + "V";
+	                 for (i = 6; i <= unidades; i++) {                                                           
+	                      romano = romano + "I";
+	                 }
+	      } else if (unidades == 4) {
+	                 romano = romano + "IV";
+	      } else {
+	                 for (i = 1; i <= unidades; i++) {
+	                      romano = romano + "I";
+	        
+	                 }
+	      }
+	      return romano;
+
+	  }
+}
